@@ -21,21 +21,21 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="name" id="name"></td>
+                    <td><input type="text" name="name"></td>
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td><input type="text" name="price" id="price"></td>
+                    <td><input type="text" name="price"></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input type="text" name="description" id="description"></td>
+                    <td><input type="text" name="description"></td>
                 </tr>
                 <tr>
                     <td>Category</td>
                     <td><select name="categoryList" id="categoryList" multiple>
                         <c:forEach items="${categoryList}" var="cate">
-                            <option value="${cate.id}">${cate.name}</option>
+                            <option value="${cate.idC}">${cate.name}</option>
                         </c:forEach>
                     </select>
                     </td>

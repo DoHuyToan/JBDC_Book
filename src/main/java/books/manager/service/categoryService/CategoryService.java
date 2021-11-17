@@ -16,7 +16,7 @@ public class CategoryService implements ICategoryService {
     public List<Category> selectAll() {
         List<Category> categoryList = new ArrayList<>();
         try {
-            PreparedStatement ps = connection.prepareStatement("select * from books order by name");
+            PreparedStatement ps = connection.prepareStatement("select * from category;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 int idC = rs.getInt("idC");
@@ -31,15 +31,17 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public void insert(Category category, int[] arr) {
+    public boolean insert(Category category, int[] arr) {
+        boolean rowInsert = false;
         try {
             PreparedStatement ps = connection.prepareStatement("insert into category(name, description) value (?, ?)");
             ps.setString(1, category.getName());
             ps.setString(2, category.getDescription());
-            ps.executeUpdate();
+           rowInsert = ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rowInsert;
     }
 
    @Override

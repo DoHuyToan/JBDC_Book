@@ -35,7 +35,7 @@ public class BookService implements IBookService{
     }
 
     @Override
-    public void insert(Book book, int[] arr) {
+    public boolean insert(Book book, int[] arr) {
         boolean rowInsert = false;
         int idB = 0;
         try {
@@ -43,7 +43,6 @@ public class BookService implements IBookService{
             ps.setString(1, book.getName());
             ps.setDouble(2, book.getPrice());
             ps.setString(3, book.getDescription());
-            ps.executeUpdate();
             rowInsert = ps.executeUpdate() > 0;
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -59,6 +58,7 @@ public class BookService implements IBookService{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rowInsert;
     }
 
     @Override
@@ -96,6 +96,7 @@ public class BookService implements IBookService{
         try {
             PreparedStatement ps = connection.prepareStatement("delete from book where idB=?");
             ps.setInt(1, idB);
+            ps.executeUpdate();
             rowDelete = ps.executeUpdate()>0;
         } catch (SQLException e) {
             e.printStackTrace();
